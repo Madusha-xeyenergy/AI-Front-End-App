@@ -1,0 +1,33 @@
+import * as React from "react"
+import { ChevronDownIcon } from "lucide-react"
+import { cn } from "cn"
+
+function NativeSelect({
+  className,
+  icon,
+  ...props
+}: React.ComponentProps<"select"> & { icon?: React.ReactNode }) {
+  return (
+    <div className="relative">
+      {icon && (
+        <span className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-muted-foreground [&_svg]:size-4">
+          {icon}
+        </span>
+      )}
+
+      <select
+        data-slot="native-select"
+        className={cn(
+          "h-9 w-full min-w-0 appearance-none rounded-lg border border-input bg-transparent py-1 pr-9 pl-3 text-base transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 md:text-sm dark:bg-input/30",
+          icon && "pl-9",
+          className
+        )}
+        {...props}
+      />
+
+      <ChevronDownIcon className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-muted-foreground" />
+    </div>
+  )
+}
+
+export { NativeSelect }
